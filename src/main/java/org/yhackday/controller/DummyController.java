@@ -34,7 +34,7 @@ public class DummyController {
      * @return
      */
     @CrossOrigin
-    @PostMapping("/action/{user_id}")
+    @PostMapping("/action/{userId}")
     @ResponseBody
     public NextActionDto addAccountAction(@PathVariable long userId, @RequestBody UserActionRequestDto userActionRequestDto) {
         logger.info("プレイヤーのアクション登録API Dummy, id:{} request body:{}", userId, userActionRequestDto);
