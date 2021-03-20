@@ -1,0 +1,94 @@
+<html>
+  <html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>bomb</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  </head>
+<body>
+<!-- 背景 -->
+<div style="position:absolute; top:0px; left:0px">
+    <img src="pictures/0208.png" width="1920px" height="1050px" alt="背景">
+</div>
+​
+<!-- 上部 -->
+<div style="position:absolute; top:0px; left:0px">
+    <img src="images/dummy/topbar.png" width="1920px" height="128px" alt="メニュー">
+</div>
+<div style="position:absolute; top:14px; left:140px">
+    <img src="images/hp.png" width="398px" height="100px" alt="HP">
+</div>
+<div style="position:absolute; top:14px; left:692px">
+    <img src="images/bomb9.png" width="260px" height="100px" alt="アイテム1">
+</div>
+<div style="position:absolute; top:14px; left:968px">
+    <img src="images/rock10.png" width="260px" height="100px" alt="アイテム2">
+</div>
+<div style="position:absolute; top:14px; left:1244px">
+    <img src="images/rock9.png" width="260px" height="100px" alt="アイテム3">
+</div>
+<div style="position:absolute; top:14px; left:1520px">
+    <img src="images/time.png" width="260px" height="100px" alt="制限時間">
+</div>
+​
+<!-- 左側 -->
+<div style="position:absolute; top:162px; left:140px">
+    <img src="images/dummy/action.png" width="260px" height="213px" alt="アクション">
+</div>
+<div style="position:absolute; top:798px; left:140px">
+    <img src="images/dummy/map.png" width="260px" height="213px" alt="地図">
+</div>
+​
+<!-- 中央 -->
+<div style="position:absolute; top:162px; left:416px">
+    <img src="images/Boom.gif" width="1088x" height="600px" alt="被弾した時のアニメーション">
+</div>
+<div style="position:absolute; top:780px; left:825px">
+    <img src="images/controller_circle.png" width="270px" height="270px" alt="十字キー">
+</div>
+<div style="position:absolute; top:780px; left:915px">
+    <img src="images/controller_up_disable.png" width="90px" height="90px" alt="十字キー(上)">
+</div>
+<div style="position:absolute; top:960px; left:915px">
+    <img src="images/controller_down_disable.png" width="90px" height="90px" alt="十字キー(下)">
+</div>
+<div style="position:absolute; top:870px; left:825px">
+    <img src="images/controller_left_disable.png" width="90px" height="90px" alt="十字キー(左)">
+</div>
+<div style="position:absolute; top:870px; left:1005px">
+    <img src="images/controller_right_disable.png" width="90px" height="90px" alt="十字キー(右)">
+</div>
+​
+<!-- 右側 -->
+<div style="position:absolute; top:162px; left:1520px">
+    <img src="images/item_selection_up.png" width="260px" height="90px" alt="アイテム選択(上)">
+</div>
+<div style="position:absolute; top:252px; left:1520px">
+    <img src="images/dynamite.png" width="260px" height="560px" alt="アイテム選択">
+</div>
+<div style="position:absolute; top:812px; left:1520px">
+    <img src="images/item_selection_down.png" width="260px" height="90px" alt="アイテム選択(下)">
+</div>
+</body>
+  </html>
+  ​
+  <script>
+      $(function(){
+          $("img").on("click", function(event){
+              $.ajax({
+                  url: "http://127.0.0.1:8080/dummy/action/1",
+                  type: "POST",
+                  contentType : "application/json",
+                  data: '{"action_id":1}',
+                  dataType : "json"
+              }).done(function(data){
+                  alert(JSON.stringify(data));
+              }).fail(function(XMLHttpRequest, status, e){
+                  //alert(e);
+              });
+          });
+      });
+  </script>
+  折りたたむ
+
+
+
