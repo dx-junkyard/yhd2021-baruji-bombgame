@@ -32,6 +32,7 @@ public class DummyController {
      * @param userActionRequestDto
      * @return
      */
+    @CrossOrigin
     @PostMapping("/action/{user_id}")
     @ResponseBody
     public NextActionDto addAccountAction(@PathVariable long user_id, @RequestBody UserActionRequestDto userActionRequestDto){
