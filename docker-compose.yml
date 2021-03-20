@@ -18,7 +18,12 @@ services:
     - ./db/my.cnf:/etc/mysql/conf.d/my.cnf
     ports:
     - 3306:3306
-#
-#  backend:
-#    build: .
-#    container_name: backend
+
+  backend:
+    build: .
+    container_name: backend
+    environment:
+      SPRING_PROFILE: prd
+      SPRING_CONFIG_LOCATION: classpath:application-prd.properties
+    ports:
+      - 8080:8080
