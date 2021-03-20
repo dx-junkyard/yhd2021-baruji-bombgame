@@ -1,0 +1,35 @@
+<html>
+  <html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>bomb</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <div style="position:absolute; top:14px; left:140px"> 
+      <img src="" width="398px" height="100px" border="1px" alt="HP">
+    </div>
+    <div style="position:absolute; top:14px; left:692px"> 
+      <img src="" width="260px" height="100px" border="1px" alt="アイテム1">
+    </div>
+<script>
+  $(function(){
+    $("img").on("click", function(event){
+      //let id = $("#main").val();
+      $.ajax({
+        url: "http://127.0.0.1:8080/dummy/action/1",
+        type: "POST",
+        contentType : "application/json",
+        data: {"action_id":1},
+        dataType : "json"
+      }).done(function(data){
+        alert('test');
+        //$("#return").append('<p>'+data.id+' : '+data.school+' : '+data.skill+'</p>');
+      }).fail(function(XMLHttpRequest, status, e){
+        alert(e);
+      });
+    });
+  });
+</script>
+  </body>
+</html>
+

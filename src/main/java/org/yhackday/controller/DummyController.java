@@ -12,6 +12,7 @@ import org.yhackday.domain.dto.UserActionRequestDto;
 import org.yhackday.service.TimeKeeperService;
 import org.yhackday.service.UserActionService;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/dummy")
 @Slf4j
