@@ -4,11 +4,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import org.yhackday.domain.Item;
 import org.yhackday.domain.Room;
+import org.yhackday.domain.UserStatus;
 
 @Data
-public class NextActionDto {
+public class UserActionDto {
     @JsonProperty("image_url")
     private String imageUrl;
+
+    @JsonProperty("user_status")
+    private UserStatus userStatus;
 
     @JsonProperty("room")
     private Room room;

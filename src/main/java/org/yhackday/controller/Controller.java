@@ -26,44 +26,46 @@ public class Controller {
 
     /**
      * Nターン目のユーザXのアクションを登録して、それによって得られる結果を返す。
-     * @param user_id
+     * @param userId
      * @param userActionRequestDto
      * @return
      */
-    @PostMapping("/action/{user_id}")
+    @PostMapping("/action/{userId}")
     @ResponseBody
-    public NextActionDto addAccountAction(@PathVariable int user_id, @RequestBody UserActionRequestDto userActionRequestDto){
-        logger.info("プレイヤーのアクション登録API: {}", user_id);
+    public NextActionDto addAccountAction(@PathVariable int userId, @RequestBody UserActionRequestDto userActionRequestDto){
+        logger.info("プレイヤーのアクション登録API: {}", userId);
 
+        NextActionDto nextActionDto = null;
         // アクションIDによって処理を変更
         switch(userActionRequestDto.getActionId()){
             case 1: // 前進
-                logger.info("User: {}, アクション: {}", user_id, "前進");
-                userActionService.addAccountAction(user_id, userActionRequestDto);
+                logger.info("User: {}, アクション: {}", userId, "前進");
+                nextActionDto = userActionService.updateUserAction(userId);
                 break;
             case 2: // 右向く
-                logger.info("User: {}, アクション: {}", user_id, "右向く");
+                logger.info("User: {}, アクション: {}", userId, "右向く");
                 break;
             case 3: // 左向く
-                logger.info("User: {}, アクション: {}", user_id, "左向く");
+                logger.info("User: {}, アクション: {}", userId, "左向く");
                 break;
             case 4: // 反転
-                logger.info("User: {}, アクション: {}", user_id, "反転");
+                logger.info("User: {}, アクション: {}", userId, "反転");
                 break;
             case 5: // 左向く
-                logger.info("User: {}, アクション: {}", user_id, "爆弾Aの設置");
+                logger.info("User: {}, アクション: {}", userId, "爆弾Aの設置");
                 break;
         }
-        return timeKeeperService.getNextActionInfo(user_id);
+        return nextActionDto;
     }
 
     /**
      * 全員のユーザがNターン目のアクションを完了し、N+1ターンに移動可能な状態かを判別する。
      * N+1ターンに移動可能な状態の場合、N+1ターン目で描画する画像、ユーザの情報を返す。
      */
-    @GetMapping("/timekeeper/{user_id}")
+    @GetMapping("/timekeeper/{userId}")
     @ResponseBody
-    public NextActionDto getNextActionInfo(@PathVariable int user_id){
-        return timeKeeperService.getNextActionInfo(user_id);
+    public NextActionDto getNextActionInfo(@PathVariable int userId){
+        logger.info("User: {}", userId);
+        return timeKeeperService.getNextActionInfo(userId);
     }
 }
