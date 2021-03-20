@@ -28,14 +28,14 @@ public class DummyController {
 
     /**
      * Nターン目のユーザXのアクションを登録して、それによって得られる結果を返す。
-     * @param user_id
+     * @param userId
      * @param userActionRequestDto
      * @return
      */
-    @PostMapping("/action/{user_id}")
+    @PostMapping("/action/{userId}")
     @ResponseBody
-    public NextActionDto addAccountAction(@PathVariable long user_id, @RequestBody UserActionRequestDto userActionRequestDto){
-        logger.info("プレイヤーのアクション登録API Dummy, id:{} request body:{}", user_id, userActionRequestDto);
+    public NextActionDto addAccountAction(@PathVariable long userId, @RequestBody UserActionRequestDto userActionRequestDto){
+        logger.info("プレイヤーのアクション登録API Dummy, id:{} request body:{}", userId, userActionRequestDto);
         return this.createDemo();
     }
 
@@ -43,22 +43,22 @@ public class DummyController {
         NextActionDto dummyNextActionDto = new NextActionDto();
 
         Item item = new Item();
-        item.setItem_id(1);
-        item.setItem_name("爆弾");
-        item.setItem_action("大爆発");
+        item.setItemId(1);
+        item.setItemName("爆弾");
+        item.setItemAction("大爆発");
 
         Room room = new Room();
         room.setRoomId(1);
-        room.setTop_room_id(1);
-        room.setBottom_room_id(2);
-        room.setRight_room_id(3);
-        room.setLeft_room_id(4);
-        room.set_top_partition_set(false);
-        room.set_bottom_partition_set(false);
-        room.set_right_partition_set(false);
-        room.set_left_partition_set(false);
+        room.setTopRoomId(1);
+        room.setBottomRoomId(2);
+        room.setRightRoomId(3);
+        room.setLeftRoomId(4);
+        room.setTopPartition(false);
+        room.setBottomPartition(false);
+        room.setRightPartition(false);
+        room.setLeftPartition(false);
 
-        dummyNextActionDto.setItemEntity(item);
+        dummyNextActionDto.setItem(item);
         dummyNextActionDto.setRoom(room);
 
         return dummyNextActionDto;

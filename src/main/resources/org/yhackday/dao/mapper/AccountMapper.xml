@@ -5,16 +5,88 @@
 <mapper namespace="org.yhackday.dao.mapper.AccountMapper">
     <sql id="actionBase">
         select
+            USER.user_id,
+            USER.life,
+            USER.room_id,
+            USER.direction,
             ROOM.room_id,
             ROOM.right_room_id,
             ROOM.is_right_partition_set,
-            ROOM_IMAGE.left_room_image_url as image_url
+            ROOM.left_room_id,
+            ROOM.is_left_partition_set,
+            ROOM.top_room_id,
+            ROOM.is_top_partition_set,
+            ROOM.bottom_room_id,
+            ROOM.is_bottom_partition_set,
+            ROOM.map_image_id,
+            ITEM.item_id,
+            ITEM.item_name,
+            ITEM.item_action
         from
-            ROOM
-        join
-            ROOM on USER.room_id = ROOM.room_id
+            USER
+        join ROOM on USER.room_id = ROOM.room_id
+        join ROOM_IMAGE on ROOM.room_image_id = ROOM_IMAGE.room_image_id
+        join USER_ITEM on USER_ITEM.user_id = USER.user_id
+        join ITEM on USER_ITEM.item_id = ITEM.item_id
     </sql>
-    <select id="getNextAction">
-        select * from ROOM
+    
+    <update id="updateUserRoom" >
+        Update USER
+        <set>
+            USER.room_id = #{roomId}
+        </set>
+        where USER.user_id = #{userId};
+    </update>
+
+    <select id="getUserStatusInfo" resultMap="userRequestMap">
+        <include refid="actionBase"></include>
+        where USER.user_id = #{userId};
     </select>
+
+    <resultMap id="userRequestMap" type="org.yhackday.domain.dto.UserActionDto">
+        <result property="limitTime" column="limit_time"/>
+        <result property="hitPoint" column="life"/>
+        <result property="alert" column="alert"/>
+        <result property="map" column="map_image_id"/>
+        <association property="userStatus" javaType="org.yhackday.domain.UserStatus">
+            <result property="userId" column="user_id"/>
+            <result property="life" column="life"/>
+            <result property="direction" column="direction"/>
+            <result property="roomId" column="room_id"/>
+        </association>
+        <association property="room" javaType="org.yhackday.domain.Room">
+            <result property="roomId" column="room_id"/>
+            <result property="rightRoomId" column="right_room_id"/>
+            <result property="rightPartition" column="is_right_partition_set"/>
+            <result property="leftRoomId" column="left_room_id"/>
+            <result property="leftPartition" column="is_left_partition_set"/>
+            <result property="topRoomId" column="top_room_id"/>
+            <result property="topPartition" column="is_top_partition_set"/>
+            <result property="bottomRoomId" column="bottom_room_id"/>
+            <result property="bottomPartition" column="is_bottom_partition_set"/>
+        </association>
+        <association property="item" javaType="org.yhackday.domain.Item">
+            <result property="itemName" column="item_name"/>
+            <result property="itemAction" column="item_action"/>
+        </association>
+    </resultMap>
+
+    <select id="getImageUrl" resultMap="imageUrl">
+        select
+            ROOM_IMAGE.right_room_image_url,
+            ROOM_IMAGE.left_room_image_url,
+            ROOM_IMAGE.top_room_image_url,
+            ROOM_IMAGE.bottom_room_image_url
+        from
+            ROOM_IMAGE
+            join ROOM on ROOM_IMAGE.room_image_id = ROOM.room_image_id
+        where
+        ROOM.room_id = #{roomId};
+    </select>
+    <resultMap id="imageUrl" type="org.yhackday.domain.RoomImage">
+        <result property="rightRoomImageUrl" column="right_room_image_url"/>
+        <result property="leftRoomImageUrl" column="left_room_image_url"/>
+        <result property="topRoomImageUrl" column="top_room_image_url"/>
+        <result property="bottomRoomImageUrl" column="bottom_room_image_url"/>
+    </resultMap>
 </mapper>
