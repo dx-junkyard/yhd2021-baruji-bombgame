@@ -6,7 +6,6 @@ import org.yhackday.domain.Item;
 import org.yhackday.domain.Room;
 import org.yhackday.domain.UserStatus;
 
-import java.util.Optional;
 
 @Data
 public class UserActionDto {
@@ -19,7 +18,7 @@ public class UserActionDto {
     @JsonProperty("room")
     private Room room;
 
-    @JsonProperty("user_items")
+    @JsonProperty("user_item")
     private Item userItems;
 
     @JsonProperty("room_items")

@@ -10,7 +10,7 @@
         </set>
         where ROOM.room_id = #{roomId};
     </update>
-    
+
     <select id="getRoomInfo" resultMap="roomInfo">
         select * from ROOM where ROOM.room_id = #{roomId};
     </select>

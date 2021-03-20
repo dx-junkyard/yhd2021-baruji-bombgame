@@ -9,5 +9,6 @@ import org.yhackday.domain.Room;
 @Mapper
 public interface RoomMapper {
     void setItemOnRoom(int roomId, int itemId);
+
     Room getRoomInfo(int roomId);
 }
