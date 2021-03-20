@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.yhackday.dao.mapper.AccountMapper">
+    <sql id="actionBase">
+        select
+            ROOM.room_id,
+            ROOM.right_room_id,
+            ROOM.is_right_partition_set,
+            ROOM_IMAGE.left_room_image_url as image_url
+        from
+            ROOM
+        join
+            ROOM on USER.room_id = ROOM.room_id
+    </sql>
+    <select id="getNextAction">
+        select * from ROOM
+    </select>
+</mapper>
