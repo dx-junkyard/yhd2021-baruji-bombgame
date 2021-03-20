@@ -1,5 +1,5 @@
-INSERT INTO `yhackday`.`ITEM` (`ITEM_ID`, `ITEM_NAME`, `ITEM_ACTION`) VALUES ('0', 'No Item', 'No Item');
-INSERT INTO `yhackday`.`ITEM` (`ITEM_ID`, `ITEM_NAME`, `ITEM_ACTION`) VALUES ('1', '爆弾A', '大爆発');
+INSERT INTO `yhackday`.`ITEM` ( `ITEM_NAME`, `ITEM_ACTION`) VALUES ( 'No Item', 'No Item');
+INSERT INTO `yhackday`.`ITEM` ( `ITEM_NAME`, `ITEM_ACTION`) VALUES ( '爆弾A', '大爆発');
 
 INSERT INTO `yhackday`.`ROOM_IMAGE` (`RIGHT_ROOM_IMAGE_URL`, `LEFT_ROOM_IMAGE_URL`, `TOP_ROOM_IMAGE_URL`, `BOTTOM_ROOM_IMAGE_URL`) VALUES ('right_test_url', 'left_test_url', 'top_test_url', 'bottom_test_url');
 
