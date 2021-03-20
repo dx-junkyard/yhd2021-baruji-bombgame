@@ -3,37 +3,45 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.yhackday.dao.mapper.AccountMapper">
+
     <sql id="actionBase">
         select
-            USER.user_id,
-            USER.life,
-            USER.room_id,
-            USER.direction,
-            ROOM.room_id,
-            ROOM.right_room_id,
-            ROOM.is_right_partition_set,
-            ROOM.left_room_id,
-            ROOM.is_left_partition_set,
-            ROOM.top_room_id,
-            ROOM.is_top_partition_set,
-            ROOM.bottom_room_id,
-            ROOM.is_bottom_partition_set,
-            ROOM.map_image_id,
-            ITEM.item_id,
-            ITEM.item_name,
-            ITEM.item_action
+        USER.user_id,
+        USER.life,
+        USER.room_id,
+        USER.direction,
+        ROOM.room_id,
+        ROOM.right_room_id,
+        ROOM.is_right_partition_set,
+        ROOM.left_room_id,
+        ROOM.is_left_partition_set,
+        ROOM.top_room_id,
+        ROOM.is_top_partition_set,
+        ROOM.bottom_room_id,
+        ROOM.is_bottom_partition_set,
+        ROOM.map_image_id,
+        ROOM.explosion_value,
+        ROOM.explosion_direction,
+        USER_ITEMS.item_id as user_item_id,
+        USER_ITEMS.item_name as user_item_name,
+        USER_ITEMS.item_action as user_item_action,
+        ROOM_ITEMS.item_id as room_item_id,
+        ROOM_ITEMS.item_name as room_item_name,
+        ROOM_ITEMS.item_action as room_item_action
         from
-            USER
+        USER
         join ROOM on USER.room_id = ROOM.room_id
         join ROOM_IMAGE on ROOM.room_image_id = ROOM_IMAGE.room_image_id
         join USER_ITEM on USER_ITEM.user_id = USER.user_id
-        join ITEM on USER_ITEM.item_id = ITEM.item_id
+        join ITEM as USER_ITEMS on USER_ITEM.item_id = USER_ITEMS.item_id
+        join ITEM as ROOM_ITEMS on ROOM.item_id = ROOM_ITEMS.item_id
     </sql>
-    
-    <update id="updateUserRoom" >
+
+    <update id="updateUserStatus">
         Update USER
         <set>
-            USER.room_id = #{roomId}
+            USER.room_id = COALESCE(#{updateUserDto.roomId}, USER.room_id),
+            USER.direction = COALESCE(#{updateUserDto.direction}, USER.direction),
         </set>
         where USER.user_id = #{userId};
     </update>
@@ -64,22 +72,30 @@
             <result property="topPartition" column="is_top_partition_set"/>
             <result property="bottomRoomId" column="bottom_room_id"/>
             <result property="bottomPartition" column="is_bottom_partition_set"/>
+            <result property="explosionValue" column="explosion_value"/>
+            <result property="explosionDirection" column="explosion_direction"/>
         </association>
-        <association property="item" javaType="org.yhackday.domain.Item">
-            <result property="itemName" column="item_name"/>
-            <result property="itemAction" column="item_action"/>
+        <association property="userItems" javaType="org.yhackday.domain.Item">
+            <result property="itemId" column="user_item_id"/>
+            <result property="itemName" column="user_item_name"/>
+            <result property="itemAction" column="user_item_action"/>
+        </association>
+        <association property="roomItems" javaType="org.yhackday.domain.Item">
+            <result property="itemId" column="room_item_id"/>
+            <result property="itemName" column="room_item_name"/>
+            <result property="itemAction" column="room_item_action"/>
         </association>
     </resultMap>
 
     <select id="getImageUrl" resultMap="imageUrl">
         select
-            ROOM_IMAGE.right_room_image_url,
-            ROOM_IMAGE.left_room_image_url,
-            ROOM_IMAGE.top_room_image_url,
-            ROOM_IMAGE.bottom_room_image_url
+        ROOM_IMAGE.right_room_image_url,
+        ROOM_IMAGE.left_room_image_url,
+        ROOM_IMAGE.top_room_image_url,
+        ROOM_IMAGE.bottom_room_image_url
         from
-            ROOM_IMAGE
-            join ROOM on ROOM_IMAGE.room_image_id = ROOM.room_image_id
+        ROOM_IMAGE
+        join ROOM on ROOM_IMAGE.room_image_id = ROOM.room_image_id
         where
         ROOM.room_id = #{roomId};
     </select>

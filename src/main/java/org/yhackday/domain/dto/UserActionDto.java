@@ -6,6 +6,8 @@ import org.yhackday.domain.Item;
 import org.yhackday.domain.Room;
 import org.yhackday.domain.UserStatus;
 
+import java.util.Optional;
+
 @Data
 public class UserActionDto {
     @JsonProperty("image_url")
@@ -17,8 +19,11 @@ public class UserActionDto {
     @JsonProperty("room")
     private Room room;
 
-    @JsonProperty("item")
-    private Item item;
+    @JsonProperty("user_items")
+    private Item userItems;
+
+    @JsonProperty("room_items")
+    private Item roomItems;
 
     @JsonProperty("limit_time")
     private int limitTime;

@@ -13,7 +13,7 @@ import java.util.Collections;
 @Configuration
 public class RestConfig {
     @Bean
-    CorsConfigurationSource corsConfigurationSource(){
+    CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
         corsConfiguration.setAllowedMethods(Arrays.asList("GET", "POST", "DELETE", "PUT"));
         corsConfiguration.setAllowedOrigins(Collections.singletonList("http://localhost:80"));
@@ -25,7 +25,7 @@ public class RestConfig {
     }
 
     @Bean
-    public ModelMapper modelMapper(){
+    public ModelMapper modelMapper() {
         return new ModelMapper();
     }
 }

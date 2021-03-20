@@ -13,8 +13,11 @@ public class NextActionDto {
     @JsonProperty("room")
     private Room room;
 
-    @JsonProperty("item")
-    private Item item;
+    @JsonProperty("user_item")
+    private Item userItems;
+
+    @JsonProperty("room_item")
+    private Item roomItems;
 
     @JsonProperty("limit_time")
     private int limitTime;

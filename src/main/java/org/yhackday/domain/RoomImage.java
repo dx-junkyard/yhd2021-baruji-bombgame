@@ -1,6 +1,5 @@
 package org.yhackday.domain;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 @Data

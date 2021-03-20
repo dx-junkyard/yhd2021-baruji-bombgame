@@ -5,30 +5,28 @@ import lombok.Data;
 
 @Data
 public class Room {
-    @JsonProperty("room_id")
-    private int roomId;
+    private Integer roomId;
 
-    @JsonProperty("right_room_id")
-    private int rightRoomId;
+    @JsonProperty("")
+    private Integer rightRoomId;
 
-    @JsonProperty("left_room_id")
-    private int leftRoomId;
+    private Integer leftRoomId;
 
-    @JsonProperty("top_room_id")
-    private int topRoomId;
+    private Integer topRoomId;
 
-    @JsonProperty("bottom_room_id")
-    private int bottomRoomId;
+    private Integer bottomRoomId;
 
-    @JsonProperty("is_right_partition_set")
     private boolean rightPartition;
 
-    @JsonProperty("is_left_partition_set")
     private boolean leftPartition;
 
-    @JsonProperty("is_top_partition_set")
     private boolean topPartition;
 
-    @JsonProperty("is_bottom_partition_set")
     private boolean bottomPartition;
+
+    private Integer itemId;
+
+    private Integer explosionValue;
+
+    private Integer explosionDirection;
 }

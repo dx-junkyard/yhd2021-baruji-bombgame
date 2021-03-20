@@ -15,11 +15,11 @@ public class TimeKeeperService {
     private ModelMapper modelMapper;
 
     @Autowired
-    public TimeKeeperService(AccountMapper accountMapper){
+    public TimeKeeperService(AccountMapper accountMapper) {
         this.accountMapper = accountMapper;
     }
 
-    public NextActionDto getNextActionInfo(int user_id){
+    public NextActionDto getNextActionInfo(int user_id) {
         UserActionDto userActionDto = accountMapper.getUserStatusInfo(user_id);
         return modelMapper.map(userActionDto, NextActionDto.class);
     }

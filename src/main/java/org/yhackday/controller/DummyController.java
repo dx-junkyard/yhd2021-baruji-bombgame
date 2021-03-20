@@ -21,25 +21,26 @@ public class DummyController {
     private TimeKeeperService timeKeeperService;
 
     @Autowired
-    public DummyController(UserActionService userActionService, TimeKeeperService timeKeeperService){
+    public DummyController(UserActionService userActionService, TimeKeeperService timeKeeperService) {
         this.userActionService = userActionService;
         this.timeKeeperService = timeKeeperService;
     }
 
     /**
      * Nターン目のユーザXのアクションを登録して、それによって得られる結果を返す。
+     *
      * @param userId
      * @param userActionRequestDto
      * @return
      */
     @PostMapping("/action/{userId}")
     @ResponseBody
-    public NextActionDto addAccountAction(@PathVariable long userId, @RequestBody UserActionRequestDto userActionRequestDto){
+    public NextActionDto addAccountAction(@PathVariable long userId, @RequestBody UserActionRequestDto userActionRequestDto) {
         logger.info("プレイヤーのアクション登録API Dummy, id:{} request body:{}", userId, userActionRequestDto);
         return this.createDemo();
     }
 
-    private NextActionDto createDemo(){
+    private NextActionDto createDemo() {
         NextActionDto dummyNextActionDto = new NextActionDto();
 
         Item item = new Item();
@@ -58,7 +59,7 @@ public class DummyController {
         room.setRightPartition(false);
         room.setLeftPartition(false);
 
-        dummyNextActionDto.setItem(item);
+        dummyNextActionDto.setUserItems(item);
         dummyNextActionDto.setRoom(room);
 
         return dummyNextActionDto;

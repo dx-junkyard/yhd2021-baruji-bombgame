@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.yhackday.dao.mapper.RoomMapper">
+    <update id="setItemOnRoom">
+        Update ROOM
+        <set>
+            ROOM.item_id = #{itemId},
+        </set>
+        where ROOM.room_id = #{roomId};
+    </update>
+    
+    <select id="getRoomInfo" resultMap="roomInfo">
+        select * from ROOM where ROOM.room_id = #{roomId};
+    </select>
+
+    <resultMap id="roomInfo" type="org.yhackday.domain.Room">
+        <result property="itemId" column="limit_time"/>
+        <result property="explosionValue" column="explosion_value"/>
+        <result property="explosionDirection" column="explosion_direction"/>
+    </resultMap>
+</mapper>

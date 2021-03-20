@@ -19,40 +19,45 @@ public class Controller {
     private TimeKeeperService timeKeeperService;
 
     @Autowired
-    public Controller(UserActionService userActionService, TimeKeeperService timeKeeperService){
+    public Controller(UserActionService userActionService, TimeKeeperService timeKeeperService) {
         this.userActionService = userActionService;
         this.timeKeeperService = timeKeeperService;
     }
 
     /**
      * Nターン目のユーザXのアクションを登録して、それによって得られる結果を返す。
+     *
      * @param userId
      * @param userActionRequestDto
      * @return
      */
     @PostMapping("/action/{userId}")
     @ResponseBody
-    public NextActionDto addAccountAction(@PathVariable int userId, @RequestBody UserActionRequestDto userActionRequestDto){
+    public NextActionDto addAccountAction(@PathVariable int userId, @RequestBody UserActionRequestDto userActionRequestDto) {
         logger.info("プレイヤーのアクション登録API: {}", userId);
 
         NextActionDto nextActionDto = null;
         // アクションIDによって処理を変更
-        switch(userActionRequestDto.getActionId()){
+        switch (userActionRequestDto.getActionId()) {
             case 1: // 前進
                 logger.info("User: {}, アクション: {}", userId, "前進");
-                nextActionDto = userActionService.updateUserAction(userId);
+                nextActionDto = userActionService.stepForward(userId);
                 break;
             case 2: // 右向く
                 logger.info("User: {}, アクション: {}", userId, "右向く");
+                nextActionDto = userActionService.changeDirection(userId, 1);
                 break;
             case 3: // 左向く
                 logger.info("User: {}, アクション: {}", userId, "左向く");
+                nextActionDto = userActionService.changeDirection(userId, -1);
                 break;
             case 4: // 反転
                 logger.info("User: {}, アクション: {}", userId, "反転");
+                nextActionDto = userActionService.changeDirection(userId, 2);
                 break;
-            case 5: // 左向く
+            case 5: // 爆弾をおく
                 logger.info("User: {}, アクション: {}", userId, "爆弾Aの設置");
+                nextActionDto = userActionService.setItems(userId);
                 break;
         }
         return nextActionDto;
@@ -64,7 +69,7 @@ public class Controller {
      */
     @GetMapping("/timekeeper/{userId}")
     @ResponseBody
-    public NextActionDto getNextActionInfo(@PathVariable int userId){
+    public NextActionDto getNextActionInfo(@PathVariable int userId) {
         logger.info("User: {}", userId);
         return timeKeeperService.getNextActionInfo(userId);
     }
