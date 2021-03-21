@@ -79,7 +79,7 @@
                   url: "http://localhost:8080/v1/action/1",
                   type: "POST",
                   contentType : "application/json",
-                  data: {actionId:1},
+                  data: JSON.stringify(data),
                   dataType : "json"
               }).done(function(data){
                   console.log(data.image_url)
@@ -97,7 +97,7 @@
                   url: "http://localhost:8080/v1/action/1",
                   type: "POST",
                   contentType : "application/json",
-                  data: {actionId:4},
+                  data: JSON.stringify(data),
                   dataType : "json"
               }).done(function(data){
                   $("#bkimg").attr("src", "/images/" + data.image_url + ".png")
@@ -124,13 +124,15 @@
           });
 
           $("#controller_right").on("click", function(event){
+              var data = { 'actionId': 2};
               $.ajax({
                   url: "http://localhost:8080/v1/action/1",
                   type: "POST",
                   contentType : "application/json",
-                  data: {actionId:2},
+                  data: JSON.stringify(data),
                   dataType : "json"
               }).done(function(data){
+                  $("#bkimg").attr("src", "/images/" + data.image_url + ".png")
                   alert(JSON.stringify(data));
               }).fail(function(XMLHttpRequest, status, e){
                   alert('error');
