@@ -72,109 +72,124 @@
   </html>
   ​
   <script>
-      $(function(){
-          $("#controller_up").on("click", function(event){
-              var data = { 'actionId': 1};
-              $.ajax({
-                  url: "http://localhost:8080/v1/action/1",
-                  type: "POST",
-                  contentType : "application/json",
-                  data: JSON.stringify(data),
-                  dataType : "json"
-              }).done(function(data){
-                  console.log(data.image_url)
-                  $("#bkimg").attr("src", "/images/" + data.image_url + ".png")
-                  $("#controller_up").attr("src", "/images/controller_up.png")
-              }).fail(function(XMLHttpRequest, status, e){
-                  alert('error');
-              });
-          });
+
+$(function(){
+    function disableKey(data) {
+<!--        if(!data.room.topRoomId){-->
+<!--            $("#controller_up").hide();-->
+<!--            console.log(data.room.topRoomId, "表示");-->
+<!--        }else{-->
+<!--            $("#controller_up").show();-->
+<!--            console.log(!data.room.topRoomId, "非表示");-->
+<!--        }-->
+<!--        console.log(data);-->
+    }
+    $("#controller_up").on("click", function(event){
+        var data = { 'actionId': 1};
+        $.ajax({
+            url: "http://localhost:8080/v1/action/1",
+            type: "POST",
+            contentType : "application/json",
+            data: JSON.stringify(data),
+            dataType : "json"
+        }).done(function(data){
+            console.log(data.image_url)
+            $("#bkimg").attr("src", "/images/" + data.image_url + ".png")
+            $("#controller_up").attr("src", "/images/controller_up.png")
+            disableKey(data);
+        }).fail(function(XMLHttpRequest, status, e){
+            alert('error');
+        });
+    });
 
 
-          $("#controller_down").on("click", function(event){
-              var data = { 'actionId': 4};
-              $.ajax({
-                  url: "http://localhost:8080/v1/action/1",
-                  type: "POST",
-                  contentType : "application/json",
-                  data: JSON.stringify(data),
-                  dataType : "json"
-              }).done(function(data){
-                  $("#bkimg").attr("src", "/images/" + data.image_url + ".png")
-                  $("#controller_down").attr("src", "/images/controller_down.png")
-              }).fail(function(XMLHttpRequest, status, e){
-                  alert('error');
-              });
-          });
+    $("#controller_down").on("click", function(event){
+        var data = { 'actionId': 4};
+        $.ajax({
+            url: "http://localhost:8080/v1/action/1",
+            type: "POST",
+            contentType : "application/json",
+            data: JSON.stringify(data),
+            dataType : "json"
+        }).done(function(data){
+            $("#bkimg").attr("src", "/images/" + data.image_url + ".png")
+            $("#controller_down").attr("src", "/images/controller_down.png")
+            disableKey(data);
+        }).fail(function(XMLHttpRequest, status, e){
+            alert('error');
+        });
+    });
 
-          $("#controller_left").on("click", function(event){
-              var data = { 'actionId': 3};
-              $.ajax({
-                  url: "http://localhost:8080/v1/action/1",
-                  type: "POST",
-                  contentType : "application/json",
-                  data: JSON.stringify(data),
-                  dataType : "json"
-              }).done(function(data){
-                  $("#bkimg").attr("src", "/images/" + data.image_url + ".png")
-                  $("#controller_left").attr("src", "/images/controller_left.png")
-              }).fail(function(XMLHttpRequest, status, e){
-                  alert(e);
-              });
-          });
+    $("#controller_left").on("click", function(event){
+        var data = { 'actionId': 3};
+        $.ajax({
+            url: "http://localhost:8080/v1/action/1",
+            type: "POST",
+            contentType : "application/json",
+            data: JSON.stringify(data),
+            dataType : "json"
+        }).done(function(data){
+            $("#bkimg").attr("src", "/images/" + data.image_url + ".png")
+            $("#controller_left").attr("src", "/images/controller_left.png")
+            disableKey(data);
+        }).fail(function(XMLHttpRequest, status, e){
+            alert(e);
+        });
+    });
 
-          $("#controller_right").on("click", function(event){
-              var data = { 'actionId': 2};
-              $.ajax({
-                  url: "http://localhost:8080/v1/action/1",
-                  type: "POST",
-                  contentType : "application/json",
-                  data: JSON.stringify(data),
-                  dataType : "json"
-              }).done(function(data){
-                  $("#bkimg").attr("src", "/images/" + data.image_url + ".png")
-                  $("#controller_right").attr("src", "/images/controller_right.png")
-              }).fail(function(XMLHttpRequest, status, e){
-                  alert('error');
-              });
-          });
+    $("#controller_right").on("click", function(event){
+        var data = { 'actionId': 2};
+        $.ajax({
+            url: "http://localhost:8080/v1/action/1",
+            type: "POST",
+            contentType : "application/json",
+            data: JSON.stringify(data),
+            dataType : "json"
+        }).done(function(data){
+            $("#bkimg").attr("src", "/images/" + data.image_url + ".png")
+            $("#controller_right").attr("src", "/images/controller_right.png")
+            disableKey(data);
+        }).fail(function(XMLHttpRequest, status, e){
+            alert('error');
+        });
+    });
 
 
-          // アイテム選択
-          $("#item_selection_up").on("click", function(event){
-              if ($("#item_selection").attr("src") == '/images/dynamite.png') {
-                  $("#item_selection").attr("src", "/images/rock.png")
-              }
-              else if ($("#item_selection").attr("src") == '/images/rock.png') {
-                  $("#item_selection").attr("src", "/images/bomb.png")
-              }
-              else if ($("#item_selection").attr("src") == '/images/bomb.png') {
-                  $("#item_selection").attr("src", "/images/dynamite.png")
-              }
-          });
-          $("#item_selection_down").on("click", function(event){
-              if ($("#item_selection").attr("src") == '/images/dynamite.png') {
-                  $("#item_selection").attr("src", "/images/bomb.png")
-              }
-              else if ($("#item_selection").attr("src") == '/images/bomb.png') {
-                  $("#item_selection").attr("src", "/images/rock.png")
-              }
-              else if ($("#item_selection").attr("src") == '/images/rock.png') {
-                  $("#item_selection").attr("src", "/images/dynamite.png")
-              }
-          });
+    // アイテム選択
+    $("#item_selection_up").on("click", function(event){
+        if ($("#item_selection").attr("src") == '/images/dynamite.png') {
+            $("#item_selection").attr("src", "/images/rock.png")
+        }
+        else if ($("#item_selection").attr("src") == '/images/rock.png') {
+            $("#item_selection").attr("src", "/images/bomb.png")
+        }
+        else if ($("#item_selection").attr("src") == '/images/bomb.png') {
+            $("#item_selection").attr("src", "/images/dynamite.png")
+        }
+    });
+    $("#item_selection_down").on("click", function(event){
+        if ($("#item_selection").attr("src") == '/images/dynamite.png') {
+            $("#item_selection").attr("src", "/images/bomb.png")
+        }
+        else if ($("#item_selection").attr("src") == '/images/bomb.png') {
+            $("#item_selection").attr("src", "/images/rock.png")
+        }
+        else if ($("#item_selection").attr("src") == '/images/rock.png') {
+            $("#item_selection").attr("src", "/images/dynamite.png")
+        }
+    });
 
-          // アイテム使用
-          $("#item_selection").on("click", function(event){
-              if ($("#item_selection").attr("src") == '/images/dynamite.png') {
-                  $("#Boom").css("visibility", "visible");
-              }
-              else if ($("#item_selection").attr("src") == '/images/bomb.png') {
-                  $("#Boom").css("visibility", "visible");
-              }
-              else if ($("#item_selection").attr("src") == '/images/rock.png') {
-                  $("#Boom").css("visibility", "visible");
-              }
-          });
-      });
+    // アイテム使用
+    $("#item_selection").on("click", function(event){
+        if ($("#item_selection").attr("src") == '/images/dynamite.png') {
+            $("#Boom").css("visibility", "visible");
+        }
+        else if ($("#item_selection").attr("src") == '/images/bomb.png') {
+            $("#Boom").css("visibility", "visible");
+        }
+        else if ($("#item_selection").attr("src") == '/images/rock.png') {
+            $("#Boom").css("visibility", "visible");
+        }
+    });
+});
   </script>
