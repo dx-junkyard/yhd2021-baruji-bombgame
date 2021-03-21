@@ -46,16 +46,16 @@
     <img src="images/controller_circle.png" width="270px" height="270px" alt="十字キー">
 </div>
 <div style="position:absolute; top:780px; left:915px">
-    <img src="images/controller_up_disable.png" width="90px" height="90px" alt="十字キー(上)">
+    <img id="controller_up" src="images/controller_up_disable.png" width="90px" height="90px" alt="十字キー(上)">
 </div>
 <div style="position:absolute; top:960px; left:915px">
-    <img src="images/controller_down_disable.png" width="90px" height="90px" alt="十字キー(下)">
+    <img id="controller_down" src="images/controller_down_disable.png" width="90px" height="90px" alt="十字キー(下)">
 </div>
 <div style="position:absolute; top:870px; left:825px">
-    <img src="images/controller_left_disable.png" width="90px" height="90px" alt="十字キー(左)">
+    <img id="controller_left" src="images/controller_left_disable.png" width="90px" height="90px" alt="十字キー(左)">
 </div>
 <div style="position:absolute; top:870px; left:1005px">
-    <img src="images/controller_right_disable.png" width="90px" height="90px" alt="十字キー(右)">
+    <img id="controller_right" src="images/controller_right_disable.png" width="90px" height="90px" alt="十字キー(右)">
 </div>
 ​
 <!-- 右側 -->
@@ -73,7 +73,7 @@
   ​
   <script>
       $(function(){
-          $("img").on("click", function(event){
+          $("#controller_up").on("click", function(event){
               $.ajax({
                   url: "http://127.0.0.1:8080/dummy/action/1",
                   type: "POST",
@@ -81,9 +81,52 @@
                   data: '{"action_id":1}',
                   dataType : "json"
               }).done(function(data){
+                  $("#controller_up").attr("src", "images/controller_up.png")
+              }).fail(function(XMLHttpRequest, status, e){
+                  alert('error');
+              });
+          });
+
+
+          $("#controller_down").on("click", function(event){
+              $.ajax({
+                  url: "http://127.0.0.1:8080/dummy/action/1",
+                  type: "POST",
+                  contentType : "application/json",
+                  data: '{"action_id":4}',
+                  dataType : "json"
+              }).done(function(data){
+                  $("#controller_down").attr("src", "images/controller_down.png")
+              }).fail(function(XMLHttpRequest, status, e){
+                  alert('error');
+              });
+          });
+
+          $("#controller_left").on("click", function(event){
+              $.ajax({
+                  url: "http://127.0.0.1:8080/dummy/action/1",
+                  type: "POST",
+                  contentType : "application/json",
+                  data: '{"action_id":3}',
+                  dataType : "json"
+              }).done(function(data){
+                  $("#controller_left").attr("src", "images/controller_left.png")
+              }).fail(function(XMLHttpRequest, status, e){
+                  alert('error');
+              });
+          });
+
+          $("#controller_right").on("click", function(event){
+              $.ajax({
+                  url: "http://127.0.0.1:8080/dummy/action/1",
+                  type: "POST",
+                  contentType : "application/json",
+                  data: '{"action_id":2}',
+                  dataType : "json"
+              }).done(function(data){
                   alert(JSON.stringify(data));
               }).fail(function(XMLHttpRequest, status, e){
-                  //alert(e);
+                  alert('error');
               });
           });
       });
