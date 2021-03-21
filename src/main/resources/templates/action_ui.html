@@ -76,7 +76,7 @@
           $("#controller_up").on("click", function(event){
               var data = { 'actionId': 1};
               $.ajax({
-                  url: "http://localhost:8080/v1/action/1",
+                  url: "http://ec2-13-231-139-158.ap-northeast-1.compute.amazonaws.com:8080/v1/action/1",
                   type: "POST",
                   contentType : "application/json",
                   data: JSON.stringify(data),
@@ -94,7 +94,7 @@
           $("#controller_down").on("click", function(event){
               var data = { 'actionId': 4};
               $.ajax({
-                  url: "http://localhost:8080/v1/action/1",
+                  url: "http://ec2-13-231-139-158.ap-northeast-1.compute.amazonaws.com:8080/v1/action/1",
                   type: "POST",
                   contentType : "application/json",
                   data: JSON.stringify(data),
@@ -110,7 +110,7 @@
           $("#controller_left").on("click", function(event){
               var data = { 'actionId': 3};
               $.ajax({
-                  url: "http://localhost:8080/v1/action/1",
+                  url: "http://ec2-13-231-139-158.ap-northeast-1.compute.amazonaws.com:8080/v1/action/1",
                   type: "POST",
                   contentType : "application/json",
                   data: JSON.stringify(data),
@@ -126,7 +126,7 @@
           $("#controller_right").on("click", function(event){
               var data = { 'actionId': 2};
               $.ajax({
-                  url: "http://localhost:8080/v1/action/1",
+                  url: "http://ec2-13-231-139-158.ap-northeast-1.compute.amazonaws.com:8080/v1/action/1",
                   type: "POST",
                   contentType : "application/json",
                   data: JSON.stringify(data),
