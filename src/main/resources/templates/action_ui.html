@@ -7,66 +7,66 @@
 <body>
 <!-- 背景 -->
 <div style="position:absolute; top:0px; left:0px">
-    <img src="pictures/0208.png" width="1920px" height="1050px" alt="背景">
+    <img src="/images/0208.png" width="1920px" height="1050px" alt="背景">
 </div>
 ​
 <!-- 上部 -->
 <div style="position:absolute; top:0px; left:0px">
-    <img src="images/dummy/topbar.png" width="1920px" height="128px" alt="メニュー">
+    <img src="/images/dummy/topbar.png" width="1920px" height="128px" alt="メニュー">
 </div>
 <div style="position:absolute; top:14px; left:140px">
-    <img src="images/hp.png" width="398px" height="100px" alt="HP">
+    <img src="/images/hp.png" width="398px" height="100px" alt="HP">
 </div>
 <div style="position:absolute; top:14px; left:692px">
-    <img src="images/bomb9.png" width="260px" height="100px" alt="アイテム1">
+    <img src="/images/bomb9.png" width="260px" height="100px" alt="アイテム1">
 </div>
 <div style="position:absolute; top:14px; left:968px">
-    <img src="images/rock10.png" width="260px" height="100px" alt="アイテム2">
+    <img src="/images/rock10.png" width="260px" height="100px" alt="アイテム2">
 </div>
 <div style="position:absolute; top:14px; left:1244px">
-    <img src="images/rock9.png" width="260px" height="100px" alt="アイテム3">
+    <img src="/images/rock9.png" width="260px" height="100px" alt="アイテム3">
 </div>
 <div style="position:absolute; top:14px; left:1520px">
-    <img src="images/time.png" width="260px" height="100px" alt="制限時間">
+    <img src="/images/time.png" width="260px" height="100px" alt="制限時間">
 </div>
 ​
 <!-- 左側 -->
 <div style="position:absolute; top:162px; left:140px">
-    <img src="images/dummy/action.png" width="260px" height="213px" alt="アクション">
+    <img src="/images/dummy/action.png" width="260px" height="213px" alt="アクション">
 </div>
 <div style="position:absolute; top:798px; left:140px">
-    <img src="images/dummy/map.png" width="260px" height="213px" alt="地図">
+    <img src="/images/dummy/map.png" width="260px" height="213px" alt="地図">
 </div>
 ​
 <!-- 中央 -->
 <div style="position:absolute; top:162px; left:416px">
-    <img src="images/Boom.gif" width="1088x" height="600px" alt="被弾した時のアニメーション">
+    <img src="/images/Boom.gif" width="1088x" height="600px" alt="被弾した時のアニメーション">
 </div>
 <div style="position:absolute; top:780px; left:825px">
-    <img src="images/controller_circle.png" width="270px" height="270px" alt="十字キー">
+    <img src="/images/controller_circle.png" width="270px" height="270px" alt="十字キー">
 </div>
 <div style="position:absolute; top:780px; left:915px">
-    <img id="controller_up" src="images/controller_up_disable.png" width="90px" height="90px" alt="十字キー(上)">
+    <img id="controller_up" src="/images/controller_up_disable.png" width="90px" height="90px" alt="十字キー(上)">
 </div>
 <div style="position:absolute; top:960px; left:915px">
-    <img id="controller_down" src="images/controller_down_disable.png" width="90px" height="90px" alt="十字キー(下)">
+    <img id="controller_down" src="/images/controller_down_disable.png" width="90px" height="90px" alt="十字キー(下)">
 </div>
 <div style="position:absolute; top:870px; left:825px">
-    <img id="controller_left" src="images/controller_left_disable.png" width="90px" height="90px" alt="十字キー(左)">
+    <img id="controller_left" src="/images/controller_left_disable.png" width="90px" height="90px" alt="十字キー(左)">
 </div>
 <div style="position:absolute; top:870px; left:1005px">
-    <img id="controller_right" src="images/controller_right_disable.png" width="90px" height="90px" alt="十字キー(右)">
+    <img id="controller_right" src="/images/controller_right_disable.png" width="90px" height="90px" alt="十字キー(右)">
 </div>
 ​
 <!-- 右側 -->
 <div style="position:absolute; top:162px; left:1520px">
-    <img src="images/item_selection_up.png" width="260px" height="90px" alt="アイテム選択(上)">
+    <img id="item_selection_up" src="/images/item_selection_up.png" width="260px" height="90px" alt="アイテム選択(上)">
 </div>
 <div style="position:absolute; top:252px; left:1520px">
-    <img src="images/dynamite.png" width="260px" height="560px" alt="アイテム選択">
+    <img id="item_selection" src="/images/dynamite.png" width="260px" height="560px" alt="アイテム選択">
 </div>
 <div style="position:absolute; top:812px; left:1520px">
-    <img src="images/item_selection_down.png" width="260px" height="90px" alt="アイテム選択(下)">
+    <img id="item_selection_down" src="/images/item_selection_down.png" width="260px" height="90px" alt="アイテム選択(下)">
 </div>
 </body>
   </html>
@@ -81,7 +81,7 @@
                   data: '{"action_id":1}',
                   dataType : "json"
               }).done(function(data){
-                  $("#controller_up").attr("src", "images/controller_up.png")
+                  $("#controller_up").attr("src", "/images/controller_up.png")
               }).fail(function(XMLHttpRequest, status, e){
                   alert('error');
               });
@@ -96,7 +96,7 @@
                   data: '{"action_id":4}',
                   dataType : "json"
               }).done(function(data){
-                  $("#controller_down").attr("src", "images/controller_down.png")
+                  $("#controller_down").attr("src", "/images/controller_down.png")
               }).fail(function(XMLHttpRequest, status, e){
                   alert('error');
               });
@@ -110,7 +110,7 @@
                   data: '{"action_id":3}',
                   dataType : "json"
               }).done(function(data){
-                  $("#controller_left").attr("src", "images/controller_left.png")
+                  $("#controller_left").attr("src", "/images/controller_left.png")
               }).fail(function(XMLHttpRequest, status, e){
                   alert('error');
               });
@@ -128,6 +128,31 @@
               }).fail(function(XMLHttpRequest, status, e){
                   alert('error');
               });
+          });
+
+
+          // アイテム選択
+          $("#item_selection_up").on("click", function(event){
+              if ($("#item_selection").attr("src") == '/images/dynamite.png') {
+                  $("#item_selection").attr("src", "/images/rock.png")
+              }
+              else if ($("#item_selection").attr("src") == '/images/rock.png') {
+                  $("#item_selection").attr("src", "/images/bomb.png")
+              }
+              else if ($("#item_selection").attr("src") == '/images/bomb.png') {
+                  $("#item_selection").attr("src", "/images/dynamite.png")
+              }
+          });
+          $("#item_selection_down").on("click", function(event){
+              if ($("#item_selection").attr("src") == '/images/dynamite.png') {
+                  $("#item_selection").attr("src", "/images/bomb.png")
+              }
+              else if ($("#item_selection").attr("src") == '/images/bomb.png') {
+                  $("#item_selection").attr("src", "/images/rock.png")
+              }
+              else if ($("#item_selection").attr("src") == '/images/rock.png') {
+                  $("#item_selection").attr("src", "/images/dynamite.png")
+              }
           });
       });
   </script>
