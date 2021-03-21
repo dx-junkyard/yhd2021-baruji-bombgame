@@ -42,25 +42,25 @@ public class TimeKeeperService {
      * ターン情報を更新する
      */
     public void nextTurn(int turnId) {
-        if (timekeeperMapper.noActionUsers(1) != -1) {
-            logger.info("全員の入力が完了したので、ターンを1つ進めます。");
-            timekeeperMapper.incrementNowTurn(turnId);
-            // 爆発処理
-            roomMapper.setExplosion();
+        // if (timekeeperMapper.noActionUsers(1) != -1) {
+        logger.info("全員の入力が完了したので、ターンを1つ進めます。");
+        timekeeperMapper.incrementNowTurn(turnId);
+        // 爆発処理
+        roomMapper.setExplosion();
 
-            // ライフを減らす
-            accountMapper.updateUserLife();
-            // Itemの経過時間を減らす
-            roomMapper.decrementItemCount();
+        // ライフを減らす
+        accountMapper.updateUserLife();
+        // Itemの経過時間を減らす
+        roomMapper.decrementItemCount();
 
-            // 爆発の威力の減退
-            roomMapper.decrementExplosionCount();
-            if (accountMapper.countAliveUser() == 0) { // 全員死亡の時
-                this.endGame(1);
-            }
-        } else {
-            logger.info("入力が完了しないのでターンを進めません。");
+        // 爆発の威力の減退
+        roomMapper.decrementExplosionCount();
+        if (accountMapper.countAliveUser() == 0) { // 全員死亡の時
+            this.endGame(1);
         }
+        // } else {
+        //     logger.info("入力が完了しないのでターンを進めません。");
+        // }
     }
 
     /**
