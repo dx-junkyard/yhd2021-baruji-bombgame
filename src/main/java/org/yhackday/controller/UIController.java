@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @CrossOrigin
 @Controller
-@RequestMapping("/dummy")
+@RequestMapping("/v1")
 public class UIController {
     @GetMapping("/action/{userId}")
     public String getNextActionInfo(@PathVariable int userId) {
