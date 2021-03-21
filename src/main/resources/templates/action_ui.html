@@ -84,6 +84,15 @@ $(function(){
 <!--        }-->
 <!--        console.log(data);-->
     }
+
+    function isBomb(data){
+        console.log(data);
+        if(data.room.explosionValue > 0){
+            console.log("大爆発！");
+            $("#Boom").css("visibility", "visible");
+            $("#Boom").gifplayer();;
+        }
+    }
     $("#controller_up").on("click", function(event){
         var data = { 'actionId': 1};
         $.ajax({
@@ -96,7 +105,7 @@ $(function(){
             console.log(data.image_url)
             $("#bkimg").attr("src", "/images/" + data.image_url + ".png")
             $("#controller_up").attr("src", "/images/controller_up.png")
-            disableKey(data);
+            isBomb(data);
         }).fail(function(XMLHttpRequest, status, e){
             alert('error');
         });
@@ -114,7 +123,7 @@ $(function(){
         }).done(function(data){
             $("#bkimg").attr("src", "/images/" + data.image_url + ".png")
             $("#controller_down").attr("src", "/images/controller_down.png")
-            disableKey(data);
+            isBomb(data);
         }).fail(function(XMLHttpRequest, status, e){
             alert('error');
         });
@@ -131,7 +140,7 @@ $(function(){
         }).done(function(data){
             $("#bkimg").attr("src", "/images/" + data.image_url + ".png")
             $("#controller_left").attr("src", "/images/controller_left.png")
-            disableKey(data);
+            isBomb(data);
         }).fail(function(XMLHttpRequest, status, e){
             alert(e);
         });
@@ -148,7 +157,7 @@ $(function(){
         }).done(function(data){
             $("#bkimg").attr("src", "/images/" + data.image_url + ".png")
             $("#controller_right").attr("src", "/images/controller_right.png")
-            disableKey(data);
+            isBomb(data);
         }).fail(function(XMLHttpRequest, status, e){
             alert('error');
         });
