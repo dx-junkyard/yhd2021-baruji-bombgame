@@ -5,6 +5,8 @@ COPY src/main/resources/application-prd.properties /apps/config/
 VOLUME /apps
 
 COPY ./entrypoint.sh /
+COPY ./timekeeper.sh /
+
 RUN chmod +x /entrypoint.sh
 
 CMD [ "/entrypoint.sh" ]

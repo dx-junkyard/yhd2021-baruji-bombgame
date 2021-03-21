@@ -10,6 +10,12 @@ docker-compose up -d db
 docker-compose up -d backend
 ```
 
+一気痛感で行う場合
+
+```sh:
+mvn clean package; docker-compose build; docker-compose up backend
+```
+
 
 ## Api
 
