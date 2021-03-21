@@ -74,6 +74,14 @@
         where USER.user_id = #{userId};
     </update>
 
+    <update id="updateUserTurn">
+        Update USER
+        <set>
+            USER.now_turn = USER.now_turn + 1,
+        </set>
+        where USER.user_id = #{userId};
+    </update>
+
     <select id="getUserStatusInfo" resultMap="userRequestMap">
         <include refid="actionBase"></include>
         where USER.user_id = #{userId};

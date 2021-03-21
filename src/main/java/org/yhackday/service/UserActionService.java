@@ -142,8 +142,11 @@ public class UserActionService {
         String url = this.getImageUrl(nextUserStatus);
         nextUserStatus.setImageUrl(url);
 
+        // accountMapper.updateUserTurn(userId);
+
         return modelMapper.map(nextUserStatus, NextActionDto.class);
     }
+
 
     /**
      * ユーザの情報を更新しレスポンスボディを返す。
@@ -161,6 +164,7 @@ public class UserActionService {
         String url = this.getImageUrl(nextUserStatus);
         nextUserStatus.setImageUrl(url);
 
+        // accountMapper.updateUserTurn(userId);
         logger.info("Next User Status, id: {}, status", userId, nextUserStatus);
         return nextUserStatus;
     }

@@ -14,6 +14,8 @@ public interface AccountMapper {
 
     int initUserImage(int userId, int itemId);
 
+    void updateUserTurn(int userId);
+
     void updateUserStatus(int userId, UpdateUserDto updateUserDto);
 
     void updateUserLife(); //ユーザがいる部屋で爆発が起きている(explosion_value>0)の時、ユーザのライフを減らす。
