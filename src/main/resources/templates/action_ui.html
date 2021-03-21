@@ -40,7 +40,7 @@
 ​
 <!-- 中央 -->
 <div style="position:absolute; top:162px; left:416px">
-    <img src="/images/Boom.gif" width="1088x" height="600px" alt="被弾した時のアニメーション">
+    <img id="Boom" src="/images/Boom.gif" width="1088x" height="600px" alt="被弾した時のアニメーション" style="visibility:hidden">
 </div>
 <div style="position:absolute; top:780px; left:825px">
     <img src="/images/controller_circle.png" width="270px" height="270px" alt="十字キー">
@@ -152,6 +152,19 @@
               }
               else if ($("#item_selection").attr("src") == '/images/rock.png') {
                   $("#item_selection").attr("src", "/images/dynamite.png")
+              }
+          });
+
+          // アイテム使用
+          $("#item_selection").on("click", function(event){
+              if ($("#item_selection").attr("src") == '/images/dynamite.png') {
+                  $("#Boom").css("visibility", "visible");
+              }
+              else if ($("#item_selection").attr("src") == '/images/bomb.png') {
+                  $("#Boom").css("visibility", "visible");
+              }
+              else if ($("#item_selection").attr("src") == '/images/rock.png') {
+                  $("#Boom").css("visibility", "visible");
               }
           });
       });
