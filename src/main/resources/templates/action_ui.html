@@ -31,12 +31,12 @@
 </div>
 ​
 <!-- 左側 -->
-<div style="position:absolute; top:162px; left:140px">
-    <img src="/images/v1/action.png" width="260px" height="213px" alt="アクション">
-</div>
-<div style="position:absolute; top:798px; left:140px">
-    <img src="/images/v1/map.png" width="260px" height="213px" alt="地図">
-</div>
+<!--<div style="position:absolute; top:162px; left:140px">-->
+<!--    <img src="/images/v1/action.png" width="260px" height="213px" alt="アクション">-->
+<!--</div>-->
+<!--<div style="position:absolute; top:798px; left:140px">-->
+<!--    <img src="/images/v1/map.png" width="260px" height="213px" alt="地図">-->
+<!--</div>-->
 ​
 <!-- 中央 -->
 <div style="position:absolute; top:162px; left:416px">
@@ -76,7 +76,7 @@
           $("#controller_up").on("click", function(event){
               var data = { 'actionId': 1};
               $.ajax({
-                  url: "http://ec2-13-231-139-158.ap-northeast-1.compute.amazonaws.com:8080/v1/action/1",
+                  url: "http://localhost:8080/v1/action/1",
                   type: "POST",
                   contentType : "application/json",
                   data: JSON.stringify(data),
@@ -94,7 +94,7 @@
           $("#controller_down").on("click", function(event){
               var data = { 'actionId': 4};
               $.ajax({
-                  url: "http://ec2-13-231-139-158.ap-northeast-1.compute.amazonaws.com:8080/v1/action/1",
+                  url: "http://localhost:8080/v1/action/1",
                   type: "POST",
                   contentType : "application/json",
                   data: JSON.stringify(data),
@@ -110,7 +110,7 @@
           $("#controller_left").on("click", function(event){
               var data = { 'actionId': 3};
               $.ajax({
-                  url: "http://ec2-13-231-139-158.ap-northeast-1.compute.amazonaws.com:8080/v1/action/1",
+                  url: "http://localhost:8080/v1/action/1",
                   type: "POST",
                   contentType : "application/json",
                   data: JSON.stringify(data),
@@ -126,14 +126,14 @@
           $("#controller_right").on("click", function(event){
               var data = { 'actionId': 2};
               $.ajax({
-                  url: "http://ec2-13-231-139-158.ap-northeast-1.compute.amazonaws.com:8080/v1/action/1",
+                  url: "http://localhost:8080/v1/action/1",
                   type: "POST",
                   contentType : "application/json",
                   data: JSON.stringify(data),
                   dataType : "json"
               }).done(function(data){
                   $("#bkimg").attr("src", "/images/" + data.image_url + ".png")
-                  alert(JSON.stringify(data));
+                  $("#controller_right").attr("src", "/images/controller_right.png")
               }).fail(function(XMLHttpRequest, status, e){
                   alert('error');
               });

@@ -16,7 +16,7 @@ public class RestConfig {
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
         corsConfiguration.setAllowedMethods(Arrays.asList("GET", "POST", "DELETE", "PUT"));
-        corsConfiguration.setAllowedOrigins(Collections.singletonList("http://ec2-13-231-139-158.ap-northeast-1.compute.amazonaws.com:8080"));
+        corsConfiguration.setAllowedOrigins(Collections.singletonList("http://localhost:8080"));
 
         UrlBasedCorsConfigurationSource corsSource = new UrlBasedCorsConfigurationSource();
         corsSource.registerCorsConfiguration("/**", corsConfiguration);
