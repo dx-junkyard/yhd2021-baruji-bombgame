@@ -4,7 +4,6 @@ import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.Banner;
 import org.springframework.stereotype.Service;
 import org.yhackday.controller.Controller;
 import org.yhackday.dao.mapper.AccountMapper;
@@ -13,8 +12,6 @@ import org.yhackday.dao.mapper.TimekeeperMapper;
 import org.yhackday.domain.UserStatus;
 import org.yhackday.domain.dto.NextActionDto;
 import org.yhackday.domain.dto.UserActionDto;
-
-import java.util.List;
 
 @Service
 public class TimeKeeperService {
@@ -44,8 +41,8 @@ public class TimeKeeperService {
     /**
      * ターン情報を更新する
      */
-    public void nextTurn(int turnId){
-        if(timekeeperMapper.noActionUsers(1) == 0){
+    public void nextTurn(int turnId) {
+        if (timekeeperMapper.noActionUsers(1) != -1) {
             logger.info("全員の入力が完了したので、ターンを1つ進めます。");
             timekeeperMapper.incrementNowTurn(turnId);
             // 爆発処理
@@ -58,10 +55,10 @@ public class TimeKeeperService {
 
             // 爆発の威力の減退
             roomMapper.decrementExplosionCount();
-            if(accountMapper.countAliveUser() == 0){ // 全員死亡の時
+            if (accountMapper.countAliveUser() == 0) { // 全員死亡の時
                 this.endGame(1);
             }
-        }else{
+        } else {
             logger.info("入力が完了しないのでターンを進めません。");
         }
     }
@@ -69,11 +66,11 @@ public class TimeKeeperService {
     /**
      * ゲームの開始処理
      */
-    public void startGame(int timekeeperId, int playerCounts){
+    public void startGame(int timekeeperId, int playerCounts) {
         // 初期化処理をする。
         this.endGame(timekeeperId);
         // 指定した人数分だけユーザを作成する。
-        for(int i=1; i <= playerCounts; i++){
+        for (int i = 1; i <= playerCounts; i++) {
             UserStatus userStatus = new UserStatus();
             userStatus.setUserId(i);
             userStatus.setLife(10);
@@ -92,7 +89,7 @@ public class TimeKeeperService {
     /**
      * ゲームの終了処理
      */
-    private void endGame(int timekeeperId){
+    private void endGame(int timekeeperId) {
         logger.info("アカウントとタイムキーパーを初期化します");
         accountMapper.deleteUserItemAll();
         accountMapper.deleteAll();
