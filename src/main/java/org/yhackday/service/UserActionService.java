@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 import org.yhackday.controller.Controller;
 import org.yhackday.dao.mapper.AccountMapper;
 import org.yhackday.dao.mapper.RoomMapper;
+import org.yhackday.dao.mapper.TimekeeperMapper;
 import org.yhackday.domain.RoomImage;
+import org.yhackday.domain.TimeKeeper;
 import org.yhackday.domain.dto.NextActionDto;
 import org.yhackday.domain.dto.UpdateUserDto;
 import org.yhackday.domain.dto.UserActionDto;
@@ -21,13 +23,16 @@ public class UserActionService {
 
     private RoomMapper roomMapper;
 
+    private TimekeeperMapper timekeeperMapper;
+
     @Autowired
     private ModelMapper modelMapper;
 
     @Autowired
-    public UserActionService(AccountMapper accountMapper, RoomMapper roomMapper) {
+    public UserActionService(AccountMapper accountMapper, RoomMapper roomMapper, TimekeeperMapper timekeeperMapper) {
         this.accountMapper = accountMapper;
         this.roomMapper = roomMapper;
+        this.timekeeperMapper = timekeeperMapper;
     }
 
     /**
@@ -38,6 +43,10 @@ public class UserActionService {
      */
     public NextActionDto stepForward(int userId) {
         UserActionDto nowUserStatus = accountMapper.getUserStatusInfo(userId);
+
+//        if(isTurnActionDone(nowUserStatus)){
+//            return modelMapper.map(nowUserStatus, NextActionDto.class);
+//        }
 
         int nowDirection = nowUserStatus.getUserStatus().getDirection();
 
@@ -88,6 +97,10 @@ public class UserActionService {
     public NextActionDto changeDirection(int userId, int changeDirectionNumber) {
         UserActionDto nowUserStatus = accountMapper.getUserStatusInfo(userId);
 
+//        if(isTurnActionDone(nowUserStatus)){
+//            return modelMapper.map(nowUserStatus, NextActionDto.class);
+//        }
+
         // 1周回ったら向きを修正する
         int directionNumber = nowUserStatus.getUserStatus().getDirection();
         directionNumber += changeDirectionNumber;
@@ -110,6 +123,10 @@ public class UserActionService {
      */
     public NextActionDto setItems(int userId) {
         UserActionDto nowUserStatus = accountMapper.getUserStatusInfo(userId);
+
+//        if(isTurnActionDone(nowUserStatus)){
+//            return modelMapper.map(nowUserStatus, NextActionDto.class);
+//        }
 
         // Itemが設置されていない時、ItemをRoomに設置する
         if (nowUserStatus.getRoomItems().getItemId() == 0) {
@@ -174,5 +191,21 @@ public class UserActionService {
         }
         logger.debug("roomImage Info: {}", roomImage);
         return imageUrl;
+    }
+
+    /**
+     * そのターンの行動の選択が終了したことを確認
+     * @param userActionDto
+     * @return
+     */
+    private boolean isTurnActionDone(UserActionDto userActionDto){
+        int timekeeperId = 1;
+        TimeKeeper nowTurn = timekeeperMapper.getNowTurn(timekeeperId);
+
+        if(nowTurn.getNowTurn() == userActionDto.getUserStatus().getNowTurn()){ // そのターンの行動が完了した時
+            return true;
+        }else{
+            return false;
+        }
     }
 }

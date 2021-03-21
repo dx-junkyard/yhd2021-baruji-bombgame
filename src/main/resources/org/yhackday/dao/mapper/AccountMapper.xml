@@ -3,6 +3,25 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.yhackday.dao.mapper.AccountMapper">
+    <insert id="initUser" parameterType="org.yhackday.domain.UserStatus">
+        insert into USER
+            (user_id, life, room_id, direction, now_turn)
+        values
+            (
+            #{userId}, #{life},
+            #{roomId}, #{direction},
+            #{nowTurn}
+            )
+    </insert>
+
+    <insert id="initUserImage">
+        insert into USER_ITEM
+            (user_id, item_id)
+        values
+            (
+            #{userId}, #{itemId}
+            )
+    </insert>
 
     <sql id="actionBase">
         select
@@ -10,6 +29,7 @@
         USER.life,
         USER.room_id,
         USER.direction,
+        USER.now_turn as limit_time,
         ROOM.room_id,
         ROOM.right_room_id,
         ROOM.is_right_partition_set,
@@ -37,6 +57,14 @@
         join ITEM as ROOM_ITEMS on ROOM.item_id = ROOM_ITEMS.item_id
     </sql>
 
+    <update id="updateUserLife">
+        Update USER
+        join ROOM on USER.room_id = ROOM.room_id
+        <set>
+            USER.life = USER.life - ROOM.explosion_value
+        </set>
+    </update>
+
     <update id="updateUserStatus">
         Update USER
         <set>
@@ -61,6 +89,7 @@
             <result property="life" column="life"/>
             <result property="direction" column="direction"/>
             <result property="roomId" column="room_id"/>
+            <result property="nowTurn" column="now_turn"/>
         </association>
         <association property="room" javaType="org.yhackday.domain.Room">
             <result property="roomId" column="room_id"/>
@@ -105,4 +134,18 @@
         <result property="topRoomImageUrl" column="top_room_image_url"/>
         <result property="bottomRoomImageUrl" column="bottom_room_image_url"/>
     </resultMap>
+
+    <select id="countAliveUser" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+        select count(*)
+        from USER
+        where USER.life > 0;
+    </select>
+    
+    <delete id="deleteAll">
+        delete from USER;
+    </delete>
+
+    <delete id="deleteUserItemAll">
+        delete from USER_ITEM;
+    </delete>
 </mapper>

@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.yhackday.domain.dto.NextActionDto;
 import org.yhackday.domain.dto.UserActionRequestDto;
@@ -22,6 +23,12 @@ public class Controller {
     public Controller(UserActionService userActionService, TimeKeeperService timeKeeperService) {
         this.userActionService = userActionService;
         this.timeKeeperService = timeKeeperService;
+    }
+
+    @RequestMapping(path = "/test", method = RequestMethod.GET)
+    public String test(Model model) {
+        model.addAttribute("msg", "サンプルメッセージ！");
+        return "frontend/test";
     }
 
     /**
@@ -72,5 +79,19 @@ public class Controller {
     public NextActionDto getNextActionInfo(@PathVariable int userId) {
         logger.info("User: {}", userId);
         return timeKeeperService.getNextActionInfo(userId);
+    }
+
+    @PostMapping("/timekeeper/init/{timekeeperId}/player/{playerCounts}")
+    @ResponseBody
+    public void startGame(@PathVariable int timekeeperId, @PathVariable int playerCounts) {
+        logger.info("Game Start,  timekeeperId: {}, playerCounts: {}", timekeeperId, playerCounts);
+        timeKeeperService.startGame(timekeeperId, playerCounts);
+    }
+
+    @PostMapping("/timekeeper/{timekeeperId}")
+    @ResponseBody
+    public void nextTurn(@PathVariable int timekeeperId) {
+        logger.info("ターンを進めていいかの判定処理: {}", timekeeperId);
+        timeKeeperService.nextTurn(timekeeperId);
     }
 }

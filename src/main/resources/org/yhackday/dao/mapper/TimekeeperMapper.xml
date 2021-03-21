@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.yhackday.dao.mapper.TimekeeperMapper">
+    <insert id="initTimekeeper">
+        insert into TIME_KEEPER (
+            timekeeper_id, now_turn, limit_turn
+        ) values (
+            #{timekeeperId}, 0 ,#{limitTurn}
+        );
+    </insert>
+
+    <update id="incrementNowTurn">
+        Update TIME_KEEPER
+        <set>
+            TIME_KEEPER.now_turn = TIME_KEEPER.now_turn + 1,
+        </set>
+        where TIME_KEEPER.timekeeper_id = #{timekeeperId};
+    </update>
+
+    <select id="getNowTurn" resultMap="timekeeperInfo">
+        select TIME_KEEPER.now_turn,TIME_KEEPER.limit_turn
+        from TIME_KEEPER
+        where TIME_KEEPER.timekeeper_id = #{timekeeperId};
+    </select>
+
+    <select id="noActionUsers" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+        select count(*)
+        from USER,TIME_KEEPER
+        where TIME_KEEPER.timekeeper_id = #{timekeeperId}
+            and TIME_KEEPER.now_turn != USER.now_turn;
+    </select>
+
+    <resultMap id="timekeeperInfo" type="org.yhackday.domain.TimeKeeper">
+        <result property="nowTurn" column="now_turn"/>
+        <result property="limitTurn" column="limit_turn"/>
+    </resultMap>
+
+    <delete id="deleteTimekeeper">
+        delete
+        from TIME_KEEPER
+        where TIME_KEEPER.timekeeper_id = #{timekeeperId};
+    </delete>
+</mapper>

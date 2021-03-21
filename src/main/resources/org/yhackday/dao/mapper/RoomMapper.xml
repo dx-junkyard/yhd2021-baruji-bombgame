@@ -7,6 +7,42 @@
         Update ROOM
         <set>
             ROOM.item_id = #{itemId},
+            ROOM.item_set_count = 3,
+        </set>
+        where ROOM.room_id = #{roomId};
+    </update>
+
+    <update id="decrementItemCount">
+        Update ROOM
+        <set>
+            ROOM.item_set_count = ROOM.item_set_count - 1,
+        </set>
+        where ROOM.item_id != 0
+            and ROOM.item_set_count != 0;
+    </update>
+
+    <update id="decrementExplosionCount">
+        Update ROOM
+        <set>
+            ROOM.explosion_value = ROOM.explosion_value - 1,
+        </set>
+        where ROOM.explosion_value != 0
+    </update>
+
+    <update id="setExplosion">
+        Update ROOM
+        <set>
+            ROOM.explosion_value = 3,
+            ROOM.item_id = 0,
+        </set>
+        where ROOM.item_id != 0
+            and ROOM.item_set_count = 0;
+    </update>
+
+    <update id="decrementItem">
+        Update ROOM
+        <set>
+            ROOM.item_id = #{itemId},
         </set>
         where ROOM.room_id = #{roomId};
     </update>

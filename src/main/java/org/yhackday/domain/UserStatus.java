@@ -16,4 +16,7 @@ public class UserStatus {
 
     @JsonProperty("direction")
     private int direction;
+
+    @JsonProperty("now_turn") // 現在の動作が何ターン目の動作かどうか
+    private int nowTurn;
 }
