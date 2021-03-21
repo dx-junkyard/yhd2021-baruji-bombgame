@@ -142,8 +142,11 @@ public class UserActionService {
         String url = this.getImageUrl(nextUserStatus);
         nextUserStatus.setImageUrl(url);
 
+        // accountMapper.updateUserTurn(userId);
+
         return modelMapper.map(nextUserStatus, NextActionDto.class);
     }
+
 
     /**
      * ユーザの情報を更新しレスポンスボディを返す。
@@ -161,6 +164,7 @@ public class UserActionService {
         String url = this.getImageUrl(nextUserStatus);
         nextUserStatus.setImageUrl(url);
 
+        // accountMapper.updateUserTurn(userId);
         logger.info("Next User Status, id: {}, status", userId, nextUserStatus);
         return nextUserStatus;
     }
@@ -195,16 +199,17 @@ public class UserActionService {
 
     /**
      * そのターンの行動の選択が終了したことを確認
+     *
      * @param userActionDto
      * @return
      */
-    private boolean isTurnActionDone(UserActionDto userActionDto){
+    private boolean isTurnActionDone(UserActionDto userActionDto) {
         int timekeeperId = 1;
         TimeKeeper nowTurn = timekeeperMapper.getNowTurn(timekeeperId);
 
-        if(nowTurn.getNowTurn() == userActionDto.getUserStatus().getNowTurn()){ // そのターンの行動が完了した時
+        if (nowTurn.getNowTurn() == userActionDto.getUserStatus().getNowTurn()) { // そのターンの行動が完了した時
             return true;
-        }else{
+        } else {
             return false;
         }
     }

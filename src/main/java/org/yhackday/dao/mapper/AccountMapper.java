@@ -6,13 +6,13 @@ import org.yhackday.domain.UserStatus;
 import org.yhackday.domain.dto.UpdateUserDto;
 import org.yhackday.domain.dto.UserActionDto;
 
-import java.util.List;
-
 @Mapper
 public interface AccountMapper {
     int initUser(UserStatus userStatus);
 
     int initUserImage(int userId, int itemId);
+
+    void updateUserTurn(int userId);
 
     void updateUserStatus(int userId, UpdateUserDto updateUserDto);
 
