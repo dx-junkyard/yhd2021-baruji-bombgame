@@ -7,12 +7,12 @@
 <body>
 <!-- 背景 -->
 <div style="position:absolute; top:0px; left:0px">
-    <img src="/images/0208.png" width="1920px" height="1050px" alt="背景">
+    <img src="/images/0208.png" id="bkimg" width="1920px" height="1050px" alt="背景">
 </div>
 ​
 <!-- 上部 -->
 <div style="position:absolute; top:0px; left:0px">
-    <img src="/images/dummy/topbar.png" width="1920px" height="128px" alt="メニュー">
+    <img src="/images/v1/topbar.png" width="1920px" height="128px" alt="メニュー">
 </div>
 <div style="position:absolute; top:14px; left:140px">
     <img src="/images/hp.png" width="398px" height="100px" alt="HP">
@@ -32,10 +32,10 @@
 ​
 <!-- 左側 -->
 <div style="position:absolute; top:162px; left:140px">
-    <img src="/images/dummy/action.png" width="260px" height="213px" alt="アクション">
+    <img src="/images/v1/action.png" width="260px" height="213px" alt="アクション">
 </div>
 <div style="position:absolute; top:798px; left:140px">
-    <img src="/images/dummy/map.png" width="260px" height="213px" alt="地図">
+    <img src="/images/v1/map.png" width="260px" height="213px" alt="地図">
 </div>
 ​
 <!-- 中央 -->
@@ -74,13 +74,16 @@
   <script>
       $(function(){
           $("#controller_up").on("click", function(event){
+              var data = { 'actionId': 1};
               $.ajax({
-                  url: "http://127.0.0.1:8080/dummy/action/1",
+                  url: "http://localhost:8080/v1/action/1",
                   type: "POST",
                   contentType : "application/json",
-                  data: '{"action_id":1}',
+                  data: {actionId:1},
                   dataType : "json"
               }).done(function(data){
+                  console.log(data.image_url)
+                  $("#bkimg").attr("src", "/images/" + data.image_url + ".png")
                   $("#controller_up").attr("src", "/images/controller_up.png")
               }).fail(function(XMLHttpRequest, status, e){
                   alert('error');
@@ -89,13 +92,15 @@
 
 
           $("#controller_down").on("click", function(event){
+              var data = { 'actionId': 4};
               $.ajax({
-                  url: "http://127.0.0.1:8080/dummy/action/1",
+                  url: "http://localhost:8080/v1/action/1",
                   type: "POST",
                   contentType : "application/json",
-                  data: '{"action_id":4}',
+                  data: {actionId:4},
                   dataType : "json"
               }).done(function(data){
+                  $("#bkimg").attr("src", "/images/" + data.image_url + ".png")
                   $("#controller_down").attr("src", "/images/controller_down.png")
               }).fail(function(XMLHttpRequest, status, e){
                   alert('error');
@@ -103,25 +108,27 @@
           });
 
           $("#controller_left").on("click", function(event){
+              var data = { 'actionId': 3};
               $.ajax({
-                  url: "http://127.0.0.1:8080/dummy/action/1",
+                  url: "http://localhost:8080/v1/action/1",
                   type: "POST",
                   contentType : "application/json",
-                  data: '{"action_id":3}',
+                  data: JSON.stringify(data),
                   dataType : "json"
               }).done(function(data){
+                  $("#bkimg").attr("src", "/images/" + data.image_url + ".png")
                   $("#controller_left").attr("src", "/images/controller_left.png")
               }).fail(function(XMLHttpRequest, status, e){
-                  alert('error');
+                  alert(e);
               });
           });
 
           $("#controller_right").on("click", function(event){
               $.ajax({
-                  url: "http://127.0.0.1:8080/dummy/action/1",
+                  url: "http://localhost:8080/v1/action/1",
                   type: "POST",
                   contentType : "application/json",
-                  data: '{"action_id":2}',
+                  data: {actionId:2},
                   dataType : "json"
               }).done(function(data){
                   alert(JSON.stringify(data));
